@@ -22,12 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\DTOs\" />
     <Folder Include="Application\Mappers\" />
     <Folder Include="Application\Services\" />
     <Folder Include="Infrastructure\Migrations\" />
     <Folder Include="Infrastructure\Configurations\" />
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
 </Project>

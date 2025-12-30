@@ -1,6 +1,203 @@
 @KindomHospital_HostAddress = http://localhost:5039
 
+### Basic health
 GET {{KindomHospital_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### ===== SPECIALTIES =====
+### List specialties
+GET {{KindomHospital_HostAddress}}/api/specialties
+Accept: application/json
+
+### Create a specialty (Cardiologie)
+POST {{KindomHospital_HostAddress}}/api/specialties
+Content-Type: application/json
+
+{
+  "name": "Cardiologie",
+  "category": "Medicale",
+  "description": "Maladies cardiovasculaires"
+}
+
+### Get specialty by id (replace 1 by created id)
+GET {{KindomHospital_HostAddress}}/api/specialties/1
+Accept: application/json
+
+### Get doctors of a specialty
+GET {{KindomHospital_HostAddress}}/api/specialties/1/doctors
+Accept: application/json
+
+### ===== MEDICAMENTS =====
+### Create a medicament
+POST {{KindomHospital_HostAddress}}/api/medicaments
+Content-Type: application/json
+
+{
+  "name": "Paracetamol",
+  "dosageForm": "Comprime",
+  "strength": "500mg",
+  "atcCode": "N02BE01"
+}
+
+### List medicaments
+GET {{KindomHospital_HostAddress}}/api/medicaments
+Accept: application/json
+
+### Get medicament ordonnances (by medicament id)
+GET {{KindomHospital_HostAddress}}/api/medicaments/1/ordonnances
+Accept: application/json
+
+### ===== DOCTORS =====
+### Create a doctor (use specialtyId from created specialty)
+POST {{KindomHospital_HostAddress}}/api/doctors
+Content-Type: application/json
+
+{
+  "specialtyId": 1,
+  "firstName": "Alice",
+  "lastName": "Martin"
+}
+
+### List doctors
+GET {{KindomHospital_HostAddress}}/api/doctors
+Accept: application/json
+
+### Get doctor by id
+GET {{KindomHospital_HostAddress}}/api/doctors/1
+Accept: application/json
+
+### Get doctor's specialty
+GET {{KindomHospital_HostAddress}}/api/doctors/1/specialty
+Accept: application/json
+
+### Change doctor's specialty
+PUT {{KindomHospital_HostAddress}}/api/doctors/1/specialty/1
+
+### Get doctor's consultations (between dates)
+GET {{KindomHospital_HostAddress}}/api/doctors/1/consultations?from=2025-01-01&to=2025-12-31
+Accept: application/json
+
+### Get doctor's patients
+GET {{KindomHospital_HostAddress}}/api/doctors/1/patients
+Accept: application/json
+
+### Get doctor's ordonnances
+GET {{KindomHospital_HostAddress}}/api/doctors/1/ordonnances?from=2025-01-01&to=2025-12-31
+Accept: application/json
+
+### ===== PATIENTS =====
+### Create a patient
+POST {{KindomHospital_HostAddress}}/api/patients
+Content-Type: application/json
+
+{
+  "firstName": "Jean",
+  "lastName": "Dupont",
+  "birthDate": "1980-05-12T00:00:00"
+}
+
+### List patients
+GET {{KindomHospital_HostAddress}}/api/patients
+Accept: application/json
+
+### Get patient by id
+GET {{KindomHospital_HostAddress}}/api/patients/1
+Accept: application/json
+
+### Get patient consultations
+GET {{KindomHospital_HostAddress}}/api/patients/1/consultations
+Accept: application/json
+
+### Get patient ordonnances
+GET {{KindomHospital_HostAddress}}/api/patients/1/ordonnances
+Accept: application/json
+
+### ===== CONSULTATIONS =====
+### Create a consultation
+POST {{KindomHospital_HostAddress}}/api/consultations
+Content-Type: application/json
+
+{
+  "doctorId": 1,
+  "patientId": 1,
+  "date": "2025-12-01T00:00:00",
+  "hour": "09:30:00",
+  "reason": "Consultation de controle"
+}
+
+### List consultations filtered (utility)
+GET {{KindomHospital_HostAddress}}/api/consultations?doctorId=1&from=2025-01-01&to=2025-12-31
+Accept: application/json
+
+### Get consultation ordonnances
+GET {{KindomHospital_HostAddress}}/api/consultations/1/ordonnances
+Accept: application/json
+
+### Create ordonnance attached to consultation
+POST {{KindomHospital_HostAddress}}/api/consultations/1/ordonnances
+Content-Type: application/json
+
+{
+  "doctorId": 1,
+  "patientId": 1,
+  "date": "2025-12-01T00:00:00",
+  "notes": "Prescription via consultation",
+  "lignes": [
+    { "medicamentId": 1, "dosage": "500 mg", "frequency": "3 fois/jour", "duration": "7 jours", "quantity": 21 }
+  ]
+}
+
+### ===== ORDONNANCES =====
+### Create an ordonnance (standalone)
+POST {{KindomHospital_HostAddress}}/api/ordonnances
+Content-Type: application/json
+
+{
+  "doctorId": 1,
+  "patientId": 1,
+  "date": "2025-12-02T00:00:00",
+  "notes": "Prescription normale",
+  "lignes": [
+    { "medicamentId": 1, "dosage": "500 mg", "frequency": "2 fois/jour", "duration": "5 jours", "quantity": 10 }
+  ]
+}
+
+### Get ordonnances for patient/doctor (utility)
+GET {{KindomHospital_HostAddress}}/api/ordonnances?doctorId=1&patientId=1&from=2025-01-01&to=2025-12-31
+Accept: application/json
+
+### Add lignes to an ordonnance (replace {id} by ordonnance id)
+POST {{KindomHospital_HostAddress}}/api/ordonnances/1/lignes
+Content-Type: application/json
+
+[
+  { "medicamentId": 1, "dosage": "500 mg", "frequency": "au besoin", "duration": "3 jours", "quantity": 5 }
+]
+
+### Get lignes of an ordonnance
+GET {{KindomHospital_HostAddress}}/api/ordonnances/1/lignes
+Accept: application/json
+
+### Update a ligne (replace 1 with ligneId)
+PUT {{KindomHospital_HostAddress}}/api/ordonnances/1/lignes/1
+Content-Type: application/json
+
+{
+  "dosage": "500 mg",
+  "frequency": "2 fois/jour",
+  "duration": "7 jours",
+  "quantity": 14
+}
+
+### Delete a ligne
+DELETE {{KindomHospital_HostAddress}}/api/ordonnances/1/lignes/1
+
+### Attach a consultation to an ordonnance
+PUT {{KindomHospital_HostAddress}}/api/ordonnances/1/consultation/1
+
+### Detach the consultation
+DELETE {{KindomHospital_HostAddress}}/api/ordonnances/1/consultation
+
+### Delete an ordonnance
+DELETE {{KindomHospital_HostAddress}}/api/ordonnances/1
+

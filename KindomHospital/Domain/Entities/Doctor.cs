@@ -6,22 +6,21 @@ namespace KindomHospital.Domain.Entities
 {
     public class Doctor
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
 
         [Required]
-        [ForeignKey(nameof(Specialty))]
         public int SpecialtyId { get; set; }
-        public Specialty Specialty { get; set; }
+        public Specialty Specialty { get; set; } = null!;
 
         [Required]
         [MaxLength(30)]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = null!;
 
         [Required]
         [MaxLength(30)]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
 
-        // Relations : N Médecins → 1 Spécialité ; 1 Médecin → N Consultations et N Ordonnances
+        // Relations
         public ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
         public ICollection<Ordonnance> Ordonnances { get; set; } = new List<Ordonnance>();
     }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace KindomHospital.Domain.Entities
 {
@@ -8,20 +9,20 @@ namespace KindomHospital.Domain.Entities
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [Required]
         [MaxLength(30)]
-        public string DosageForm { get; set; }
+        public string DosageForm { get; set; } = null!;
 
         [Required]
         [MaxLength(30)]
-        public string Strength { get; set; }
+        public string Strength { get; set; } = null!;
 
         [MaxLength(20)]
-        public string AtcCode { get; set; }
+        public string? AtcCode { get; set; }
 
-        // Relations : 1 Médicament → N Lignes d’ordonnance
+        // Relations
         public ICollection<OrdonnanceLigne> OrdonnanceLignes { get; set; } = new List<OrdonnanceLigne>();
     }
 }

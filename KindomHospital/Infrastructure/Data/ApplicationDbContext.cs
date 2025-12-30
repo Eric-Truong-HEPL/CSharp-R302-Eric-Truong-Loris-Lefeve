@@ -1,7 +1,6 @@
 ﻿using KindomHospital.Domain.Entities;
-using KindomHospital.Domain.Entities.CliniqueApp.Models;
 using Microsoft.EntityFrameworkCore;
-
+//sépare ApplicationDbContext des entités   
 namespace KindomHospital.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
@@ -22,7 +21,8 @@ namespace KindomHospital.Infrastructure.Data
 
             // Indexes & unique constraints
             modelBuilder.Entity<Specialty>().HasIndex(s => s.Name).IsUnique();
-            modelBuilder.Entity<Medicament>().HasIndex(m => new { m.Name, m.DosageForm, m.Strength }).IsUnique(false);
+            // Ensure medicament name uniqueness as required by the specification
+            modelBuilder.Entity<Medicament>().HasIndex(m => m.Name).IsUnique();
 
             // Specialty -> Doctors (1->N) : protect delete
             modelBuilder.Entity<Doctor>()

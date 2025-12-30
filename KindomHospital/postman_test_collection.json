@@ -1,0 +1,244 @@
+﻿{
+  "info": {
+    "name": "KindomHospital API - Generated Test Collection",
+    "_postman_id": "b8c3f8e0-generated-0000-000000000000",
+    "description": "Auto-generated Postman collection covering required CRUD and relational endpoints for the KindomHospital API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5039", "type": "string" },
+    { "key": "specialtyId", "value": "1", "type": "string" },
+    { "key": "doctorId", "value": "1", "type": "string" },
+    { "key": "patientId", "value": "1", "type": "string" },
+    { "key": "consultationId", "value": "1", "type": "string" },
+    { "key": "ordonnanceId", "value": "1", "type": "string" },
+    { "key": "ligneId", "value": "1", "type": "string" },
+    { "key": "medicamentId", "value": "1", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Specialties / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/specialties" }
+    },
+    {
+      "name": "Specialties / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/specialties/{{specialtyId}}" }
+    },
+    {
+      "name": "Specialties / Get Doctors",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/specialties/{{specialtyId}}/doctors" }
+    },
+    {
+      "name": "Doctors / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors" }
+    },
+    {
+      "name": "Doctors / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}" }
+    },
+    {
+      "name": "Doctors / Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"specialtyId\": 1,\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Martin\"\n}" },
+        "url": "{{baseUrl}}/api/doctors"
+      }
+    },
+    {
+      "name": "Doctors / Update",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"specialtyId\": 2,\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Dupont\"\n}" },
+        "url": "{{baseUrl}}/api/doctors/{{doctorId}}"
+      }
+    },
+    {
+      "name": "Doctors / Get Specialty",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}/specialty" }
+    },
+    {
+      "name": "Doctors / Change Specialty",
+      "request": { "method": "PUT", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}/specialty/{{specialtyId}}" }
+    },
+    {
+      "name": "Patients / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/patients" }
+    },
+    {
+      "name": "Patients / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/patients/{{patientId}}" }
+    },
+    {
+      "name": "Patients / Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Dupont\",\n  \"birthDate\": \"1980-05-12T00:00:00\"\n}" },
+        "url": "{{baseUrl}}/api/patients"
+      }
+    },
+    {
+      "name": "Patients / Update",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Jean\",\n  \"lastName\": \"Dupont-Updated\"\n}" },
+        "url": "{{baseUrl}}/api/patients/{{patientId}}"
+      }
+    },
+    {
+      "name": "Patients / Delete",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/patients/{{patientId}}" }
+    },
+    {
+      "name": "Consultations / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/consultations" }
+    },
+    {
+      "name": "Consultations / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/consultations/{{consultationId}}" }
+    },
+    {
+      "name": "Consultations / Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"doctorId\": 1,\n  \"patientId\": 1,\n  \"date\": \"2025-12-01T00:00:00\",\n  \"hour\": \"09:30:00\",\n  \"reason\": \"Consultation de controle\"\n}" },
+        "url": "{{baseUrl}}/api/consultations"
+      }
+    },
+    {
+      "name": "Consultations / Update",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"reason\": \"Raison mise a jour\"\n}" },
+        "url": "{{baseUrl}}/api/consultations/{{consultationId}}"
+      }
+    },
+    {
+      "name": "Consultations / Delete",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/consultations/{{consultationId}}" }
+    },
+    {
+      "name": "Consultations / Get by Doctor (range)",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}/consultations?from=2025-01-01&to=2025-12-31" }
+    },
+    {
+      "name": "Doctors / Patients (already consulted)",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}/patients" }
+    },
+    {
+      "name": "Doctors / Ordonnances (range)",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/doctors/{{doctorId}}/ordonnances?from=2025-01-01&to=2025-12-31" }
+    },
+    {
+      "name": "Medicaments / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/medicaments" }
+    },
+    {
+      "name": "Medicaments / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/medicaments/{{medicamentId}}" }
+    },
+    {
+      "name": "Medicaments / Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Paracetamol\",\n  \"dosageForm\": \"Comprime\",\n  \"strength\": \"500mg\",\n  \"atcCode\": \"N02BE01\"\n}" },
+        "url": "{{baseUrl}}/api/medicaments"
+      }
+    },
+    {
+      "name": "Medicaments / Ordonnances (where used)",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/medicaments/{{medicamentId}}/ordonnances" }
+    },
+    {
+      "name": "Ordonnances / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/ordonnances" }
+    },
+    {
+      "name": "Ordonnances / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}" }
+    },
+    {
+      "name": "Ordonnances / Create",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"doctorId\": 1,\n  \"patientId\": 1,\n  \"date\": \"2025-12-02T00:00:00\",\n  \"notes\": \"Prescription normale\",\n  \"lignes\": [\n    { \"medicamentId\": 1, \"dosage\": \"500 mg\", \"frequency\": \"2 fois/jour\", \"duration\": \"5 jours\", \"quantity\": 10 }\n  ]\n}" },
+        "url": "{{baseUrl}}/api/ordonnances"
+      }
+    },
+    {
+      "name": "Ordonnances / Update",
+      "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"notes\": \"Mise a jour notes\"\n}" }, "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}" }
+    },
+    {
+      "name": "Ordonnances / Delete",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}" }
+    },
+    {
+      "name": "Consultations/{id}/Ordonnances / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/consultations/{{consultationId}}/ordonnances" }
+    },
+    {
+      "name": "Consultations/{id}/Ordonnances / Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"doctorId\": 1,\n  \"patientId\": 1,\n  \"date\": \"2025-12-02T00:00:00\",\n  \"notes\": \"Ordonnance depuis consultation\",\n  \"lignes\": [\n    { \"medicamentId\": 1, \"dosage\": \"500 mg\", \"frequency\": \"2 fois/jour\", \"duration\": \"5 jours\", \"quantity\": 10 }\n  ]\n}"
+        },
+        "url": "{{baseUrl}}/api/consultations/{{consultationId}}/ordonnances"
+      }
+    },
+    {
+      "name": "Ordonnances/{id}/Consultation / Attacher une ordonnance avec une consultation",
+      "request": { "method": "PUT", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/consultation/{{consultationId}}" }
+    },
+    {
+      "name": "Ordonnances/{id}/Consultation / Detach",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/consultation" }
+    },
+    {
+      "name": "Ordonnances/{id}/Lignes / List",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/lignes" }
+    },
+    {
+      "name": "Ordonnances/{id}/Lignes / Add",
+      "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "[ { \"medicamentId\": 1, \"dosage\": \"500 mg\", \"frequency\": \"2 fois/jour\", \"duration\": \"5 jours\", \"quantity\": 10 } ]" }, "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/lignes" }
+    },
+    {
+      "name": "Ordonnances/{id}/Lignes / Get by Id",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/lignes/{{ligneId}}" }
+    },
+    {
+      "name": "Ordonnances/{id}/Lignes / Update",
+      "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{ \"dosage\": \"250 mg\", \"quantity\": 5 }" }, "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/lignes/{{ligneId}}" }
+    },
+    {
+      "name": "Ordonnances/{id}/Lignes / Delete",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/ordonnances/{{ordonnanceId}}/lignes/{{ligneId}}" }
+    },
+    {
+      "name": "Patients/{id}/Consultations",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/patients/{{patientId}}/consultations" }
+    },
+    {
+      "name": "Patients/{id}/Ordonnances",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/patients/{{patientId}}/ordonnances" }
+    },
+    {
+      "name": "Utility / Consultations filtered",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/consultations?doctorId={{doctorId}}&patientId={{patientId}}&from=2025-01-01&to=2025-12-31" }
+    },
+    {
+      "name": "Utility / Ordonnances filtered",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/ordonnances?doctorId={{doctorId}}&patientId={{patientId}}&from=2025-01-01&to=2025-12-31" }
+    }
+  ]
+}

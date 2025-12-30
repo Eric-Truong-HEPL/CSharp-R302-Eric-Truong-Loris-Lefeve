@@ -8,32 +8,30 @@ namespace KindomHospital.Domain.Entities
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Ordonnance))]
         public int OrdonnanceId { get; set; }
-        public Ordonnance Ordonnance { get; set; }
+        public Ordonnance Ordonnance { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Medicament))]
         public int MedicamentId { get; set; }
-        public Medicament Medicament { get; set; }
+        public Medicament Medicament { get; set; } = null!;
 
         [Required]
         [MaxLength(50)]
-        public string Dosage { get; set; }
+        public string Dosage { get; set; } = null!;
 
         [Required]
         [MaxLength(50)]
-        public string Frequency { get; set; }
+        public string Frequency { get; set; } = null!;
 
         [Required]
         [MaxLength(30)]
-        public string Duration { get; set; }
+        public string Duration { get; set; } = null!;
 
         [Required]
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
 
         [MaxLength(255)]
-        public string Instructions { get; set; }
+        public string? Instructions { get; set; }
     }
 }
